@@ -51,54 +51,54 @@
                 // select: function(info) {
                 // alert('selected ' + info.startStr + ' to ' + info.endStr);
       },
-                events:[
-                  {
-                    title: 'All Day Event',
-                    start: '2021-07-01'
-                  },
-                  {
-                    title: 'Long Event',
-                    start: '2021-07-07',
-                    end: '2021-07-10'
-                  },
-                  {
-                    groupId: '999',
-                    title: 'Repeating Event',
-                    start: '2021-07-09T16:00:00'
-                  },
-                  {
-                    groupId: '999',
-                    title: 'Repeating Event',
-                    start: '2021-07-16T16:00:00'
-                  },
-                  {
-                    title: 'Conference',
-                    start: '2021-07-11',
-                    end: '2021-07-13'
-                  },
-                  {
-                    title: 'Meeting',
-                    start: '2021-07-12T10:30:00',
-                    end: '2021-07-12T12:30:00'
-                  },
-                  {
-                    title: 'Lunch',
-                    start: '2021-07-12T12:00:00'
-                  },
-                  {
-                    title: 'Meeting',
-                    start: '2021-07-12T14:30:00'
-                  },
-                  {
-                    title: 'Birthday Party',
-                    start: '2021-07-13T07:00:00'
-                  },
-                  {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: '2021-07-28'
-                  }
-                ]
+                // events:[
+                //   {
+                //     title: 'All Day Event',
+                //     start: '2021-07-01'
+                //   },
+                //   {
+                //     title: 'Long Event',
+                //     start: '2021-07-07',
+                //     end: '2021-07-10'
+                //   },
+                //   {
+                //     groupId: '999',
+                //     title: 'Repeating Event',
+                //     start: '2021-07-09T16:00:00'
+                //   },
+                //   {
+                //     groupId: '999',
+                //     title: 'Repeating Event',
+                //     start: '2021-07-16T16:00:00'
+                //   },
+                //   {
+                //     title: 'Conference',
+                //     start: '2021-07-11',
+                //     end: '2021-07-13'
+                //   },
+                //   {
+                //     title: 'Meeting',
+                //     start: '2021-07-12T10:30:00',
+                //     end: '2021-07-12T12:30:00'
+                //   },
+                //   {
+                //     title: 'Lunch',
+                //     start: '2021-07-12T12:00:00'
+                //   },
+                //   {
+                //     title: 'Meeting',
+                //     start: '2021-07-12T14:30:00'
+                //   },
+                //   {
+                //     title: 'Birthday Party',
+                //     start: '2021-07-13T07:00:00'
+                //   },
+                //   {
+                //     title: 'Click for Google',
+                //     url: 'http://google.com/',
+                //     start: '2021-07-28'
+                //   }
+                // ]
               });
           
               calendar.render();
@@ -115,7 +115,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Add Event to </h4>
                 </div>
-                <form method="post" action="<?php echo base_url(); ?>admin/edit_business_skill">
+                <form method="post" action="/getdata">
                     <div class="modal-body">
                         <div class="form-group">
                             <input class="form-control business_skill_id" type="hidden" name="id">
@@ -124,13 +124,13 @@
                         <div class="form-group">
                             <input class="form-control business_skill_content" type="hidden" name="content">
                             <!-- <label for="heading">Enter program details</label> -->
-                            <textarea class="form-control" id="business_skill_content"  name="content"  placeholder="Enter the Description" rows="4" cols="50" ></textarea>
+                            <textarea class="form-control" id="business_skill_content"  name="content1"  placeholder="Enter the Description" rows="4" cols="50" ></textarea>
                         </div>
                       
                         <div class="radio">
                           Type of Events &nbsp;&nbsp;&nbsp;
-                          <label class="radio-inline"><input type="radio" name="optradio">Indoor</label>
-                          <label class="radio-inline"><input type="radio" name="optradio">Outdoor</label>
+                          <label class="radio-inline"><input type="radio" name="optradio" value="Indoor">Indoor</label>
+                          <label class="radio-inline"><input type="radio" name="optradio" value="Outdoor">Outdoor</label>
                         </div>
                      
                         Enter start time &nbsp;&nbsp;&nbsp;&nbsp;
@@ -138,7 +138,7 @@
                              <div class='col-sm-6'>
                                 <div class="form-group">
                                    <div class='input-group date' id='datetimepicker3'>
-                                      <input type='text' class="form-control" >
+                                      <input type='text' class="form-control" name="stTime">
                                       <span class="input-group-addon">
                                       <span class="glyphicon glyphicon-time"></span>
                                       </span>
@@ -158,7 +158,7 @@
                             <div class='col-sm-6'>
                                <div class="form-group">
                                   <div class='input-group date' id='datetimepicker3'>
-                                     <input type='text' class="form-control" >
+                                     <input type='text' class="form-control" name="endTime" >
                                      <span class="input-group-addon">
                                      <span class="glyphicon glyphicon-time"></span>
                                      </span>
@@ -184,7 +184,7 @@
         </div>
     </div>
         
-        <!-- <h1> Welcome!{{a}}</h1> -->
+        <h1> Welcome!'{{events}}'</h1>
         <div id="calendar" style="width:80%;height:70%"></div>
         
     </body>
