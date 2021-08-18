@@ -19,7 +19,25 @@
 
             document.addEventListener('DOMContentLoaded', function() {
               var calendarEl = document.getElementById('calendar');
-          
+              var eventss = [];
+
+              var number = parseInt('{{n}}');
+              console.log(typeof number);
+
+              myvar = '{{events|tojson}}';
+           
+              var parsed = JSON.parse(myvar);
+              console.log(parsed);
+              
+
+              for(var i =0; i < number; i++) 
+                {eventss.push( {title: parsed[i].title, start: parsed[i].Start })}
+              
+              console.log(eventss);
+
+              
+
+
               var calendar = new FullCalendar.Calendar(calendarEl, {
                 height: 650,
                 initialView: 'dayGridMonth',
@@ -51,16 +69,7 @@
                 // select: function(info) {
                 // alert('selected ' + info.startStr + ' to ' + info.endStr);
       },
-                // events:[
-                //   {
-                //     title: 'All Day Event',
-                //     start: '2021-07-01'
-                //   },
-                //   {
-                //     title: 'Long Event',
-                //     start: '2021-07-07',
-                //     end: '2021-07-10'
-                //   },
+                events:eventss
                 //   {
                 //     groupId: '999',
                 //     title: 'Repeating Event',
@@ -104,7 +113,7 @@
               calendar.render();
             });
           // Time Picker Initialization
-            $('#input_starttime').pickatime({});
+            // $('#input_starttime').pickatime({});
           </script>
     </head>
     <body>
@@ -184,7 +193,7 @@
         </div>
     </div>
         
-        <h1> Welcome!'{{events}}'</h1>
+        <h1> Welcome!'{{n}}'</h1>
         <div id="calendar" style="width:80%;height:70%"></div>
         
     </body>
