@@ -33,7 +33,7 @@ def calendar_page():
 def data_get():
    if request.method == "POST":
          requestInput = request.form
-         eventDate = '2021-07-14'
+         eventDate = requestInput.get('dt') 
          eventName = requestInput.get('name')
          eventDes = requestInput.get('content1')
          eventType = requestInput.get('optradio')

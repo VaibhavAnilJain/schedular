@@ -48,23 +48,27 @@
                   center: 'title',
                   right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
+                eventClick: function(info) {
+                    alert('Event: ' + info.event.title);
+                },
                 dateClick: function(info){
                   $("#myModalLabel").text("Add Events to "+info.dateStr); 
                   $("#exampleModalCenter").modal('show');
+                  $("#dateday").val(info.dateStr);
                   // alert(info.dateStr);
                   // arr=info.dateStr;
-                  // $.ajax
-                  // ({
-                  //     url:'/calendarPage',
-                  //     type:'POST',
-                  //     data:{'date':info.dateStr},
-                  //     success:function(response){
-                  //        console.log(response); 
-                  //     },
-                  //     error: function(error){
-                  //       console.log(error);
-                  //     }
-                  // })
+                  $.ajax
+                  ({
+                      url:'/calendarPage',
+                      type:'POST',
+                      data:{'date':info.dateStr},
+                      success:function(response){
+                         console.log(response); 
+                      },
+                      error: function(error){
+                        console.log(error);
+                      }
+                  })
                 // },
                 // select: function(info) {
                 // alert('selected ' + info.startStr + ' to ' + info.endStr);
@@ -173,14 +177,11 @@
                                      </span>
                                   </div>
                                </div>
-                            </div>
-                            <!-- <script type="text/javascript">
-                               $(function () {
-                                   $('#datetimepicker3').datetimepicker({
-                                       format: 'LT'
-                                   });
-                               });
-                            </script> -->
+                              </div>
+                         </div>
+                         <div class = "datte">
+                          <input type='hidden' class="form-control" id="dateday" name="dt" >
+
                          </div>
                     <div class="modal-footer">
                     
