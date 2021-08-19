@@ -6,6 +6,11 @@ app = Flask(__name__)
 mongodb_client = PyMongo(app, uri="mongodb://localhost:27017/schedulardb")
 db = mongodb_client.db
 
+class Item:
+  def __init__(self, vals):
+    self.__dict__ = vals
+
+
 
 @app.route('/')
 def index():
@@ -22,7 +27,7 @@ def calendar_page():
    even = len(e2)
    print(even)
 
-   return render_template('calendar_page.html',events = e2,n = even)
+   return render_template('calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2])
 
 @app.route('/getdata', methods=['GET','POST'])
 def data_get():
@@ -47,7 +52,7 @@ def data_get():
             print(even)
 
 
-   return render_template('/calendar_page.html',events = e2,n = even)
+   return render_template('/calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2])
 
 
 

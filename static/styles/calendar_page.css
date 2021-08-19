@@ -1,0 +1,17 @@
+
+
+.container{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+#calendar{
+    width: 90%;
+    height: 100%;
+}
+#tb{
+    margin-left: 4px;
+    width:30%;
+    color: white;
+    background-color: #2C3E50 ;
+}
