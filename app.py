@@ -40,7 +40,7 @@ def data_get():
          eventSt = requestInput.get('stTime')
          eventEnd = requestInput.get('endTime')
          if(len(eventName)>0):
-            db.schedulardb.insert_one({'Start':eventDate, 'title':eventName })
+            db.schedulardb.insert_one({'start':eventDate, 'title':eventName })
             print("insert running")
             
             e1 = list(db.schedulardb.find())
@@ -54,11 +54,25 @@ def data_get():
 
    return render_template('/calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2])
 
+@app.route('/deleteData', methods=['GET','POST'])
+def data_del():
+   if request.method == "POST":
+         requestInput = request.form
+         eventDate = requestInput.get('date_')                # Getting the date from js
+         eventTitle = requestInput.get('title_')              # Getting the title from js
+         print(eventDate+" "+eventTitle)
+       
+         # print(even)
+         myquery = { 'start':eventDate,'title': eventTitle }
 
-
-# @app.route('/getdata/<dt>', methods=['GET','POST'])
-# def data_get(dt):
-    
+         db.schedulardb.delete_one(myquery)
+         e1 = list(db.schedulardb.find())
+         # print(e1)
+         # print(type(e1))
+         e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1]
+         even = len(e2)
+         print("Event deleted")
+   return render_template('/calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2])
 
 
 if __name__ == '__main__':
