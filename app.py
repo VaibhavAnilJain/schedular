@@ -56,10 +56,12 @@ def data_get():
          startTime = (timeConvert(eventSt))
          endTime = (timeConvert(eventEnd))
          
-
+         
          
          if(len(eventName)>0):
-            db.schedulardb.insert_one({'start':eventDate, 'title':eventName, 'des': eventDes, 'startTime': startTime, 'stTimeap':eventSt ,'endTime': endTime, 'endTimeap':eventEnd })
+            
+            db.schedulardb.insert_one({'start':eventDate, 'title':eventName, 'des': eventDes, 'startTime': startTime, 'stTimeap':eventSt ,'endTime': endTime, 'endTimeap':eventEnd, 'end': str_endate })
+            
             print("insert running")
             
             e1 = list(db.schedulardb.find())
@@ -77,12 +79,19 @@ def data_get():
 def data_del():
    if request.method == "POST":
          requestInput = request.form
-         eventDate = requestInput.get('date_')                # Getting the date from js
-         eventTitle = requestInput.get('title_')              # Getting the title from js
-         print(eventDate+" "+eventTitle)
+         startDate = requestInput.get('stdate_')                # Getting the date from js
+         eTitle = requestInput.get('title_')   
+         startTime = requestInput.get('stTime_')           # Getting the title from js
+         endTime = requestInput.get('eTime_')
+         endDate = requestInput.get('eDate_')
+         print(startDate+" "+eTitle+" "+startTime+" "+endTime+" "+endDate)
        
          # print(even)
-         myquery = { 'start':eventDate,'title': eventTitle }
+         # formateDate = new SimpleDateFormat("MM-dd-yyyy").format(date)
+         # formate_date=eventDate.strftime("%H:%M:%SZ")
+         # print(eventDate)
+
+         myquery = {'start':startDate,'title': eTitle, 'startTime': startTime, 'endTime':endTime,'end':endDate}
 
          db.schedulardb.delete_one(myquery)
          e1 = list(db.schedulardb.find())

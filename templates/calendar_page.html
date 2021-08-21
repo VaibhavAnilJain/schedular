@@ -32,7 +32,7 @@
               
 
               for(var i =0; i < number; i++) 
-                {eventss.push( {title: parsed[i].title, start: parsed[i].start+'T'+parsed[i].startTime })}
+                {eventss.push( {title: parsed[i].title, start: parsed[i].start+'T'+parsed[i].startTime, end: parsed[i].end+'T'+parsed[i].endTime })}
               
               console.log(eventss);
 
@@ -51,11 +51,17 @@
                 },
                 eventClick: function(info) {
                     //alert('Event: ' + moment(info.event.start).format('YYYY-MM-DD'));
+                    alert(info.event.end)
                     $("#myModalLabel3").text("Event title "+info.event.title); 
                    $("#myModalLabel2").text("Date "+moment(info.event.start).format('YYYY-MM-DD'));
                    $("#events_descr").modal('show');
-                   $("#date_").val(moment(info.event.start).format('YYYY-MM-DD'));
+                   $("#stdate_").val(moment(info.event.start).format('YYYY-MM-DD'));
                    $("#title_").val(info.event.title);
+                   var a = info.event.start;
+                   $('#stTime_').val(moment(info.event.start).format('HH:mm'));
+                   $('#eTime_').val(moment(info.event.end).format('HH:mm'));
+                   $('#eDate_').val(moment(info.event.end).format('YYYY-MM-DD'));
+                   console.log(moment(info.event.start).format('HH:mm:ss'));
                     
                 },
                 dateClick: function(info){
@@ -221,12 +227,21 @@
                   
                     
                        <h6 class="modal-title1" id="myModalLabel2"></h6>
-                       <div class = "datte">
-                        <input type='hidden' class="form-control" id="date_" name="date_" >
+                       <div class = "startDate_">
+                        <input type='hidden' class="form-control" id="stdate_" name="stdate_" >
                        </div>
                        <div class = "titlee">
                         <input type='hidden' class="form-control" id="title_" name="title_" >
 
+                       </div>
+                       <div class = "startTime_">
+                        <input type='hidden' class="form-control" id="stTime_" name="stTime_" >
+                       </div>
+                       <div class = "endTime_">
+                        <input type='hidden' class="form-control" id="eTime_" name="eTime_" >
+                       </div>
+                       <div class = "endDate_">
+                        <input type='hidden' class="form-control" id="eDate_" name="eDate_" >
                        </div>
                   <div class="modal-footer">
                   
@@ -270,8 +285,9 @@
             <thead>
               <tr>
                 
-                <th scope="col">Date</th>
+                <th scope="col">Start date</th>
                 <th scope="col">Start Time</th>
+                <th scope="col">End date</th>
                 <th scope="col">End Time</th>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
@@ -284,6 +300,7 @@
                 
                 <td>{{i.start}}</td>
                 <td>{{i.stTimeap}}</td>
+                <td>{{i.end}}</td>
                 <td>{{i.endTimeap}}</td>
                 <td>{{i.title}}</td>
                 <td>{{i.des}}</td>
