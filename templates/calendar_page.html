@@ -32,7 +32,7 @@
               
 
               for(var i =0; i < number; i++) 
-                {eventss.push( {title: parsed[i].title, start: parsed[i].start })}
+                {eventss.push( {title: parsed[i].title, start: parsed[i].start+'T'+parsed[i].startTime })}
               
               console.log(eventss);
 
@@ -267,7 +267,10 @@
               <tr>
                 
                 <th scope="col">Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
                 <th scope="col">Title</th>
+                <th scope="col">Description</th>
               </tr>
             </thead>
             <tbody>
@@ -275,8 +278,12 @@
               
               <tr>
                 
-                <td>{{i.Start}}</td>
+                <td>{{i.start}}</td>
+                <td>{{i.stTimeap}}</td>
+                <td>{{i.stTimeap}}</td>
                 <td>{{i.title}}</td>
+                <td>{{i.des}}</td>
+
               </tr>
               {% endfor %}
               <!-- <tr>

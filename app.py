@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request,jsonify,json
 from flask_pymongo import PyMongo
 from pymongo import message
+from datetime import datetime
 
 app = Flask(__name__)
 mongodb_client = PyMongo(app, uri="mongodb://localhost:27017/schedulardb")
@@ -36,11 +37,23 @@ def data_get():
          eventDate = requestInput.get('dt') 
          eventName = requestInput.get('name')
          eventDes = requestInput.get('content1')
-         eventType = requestInput.get('optradio')
+         # eventType = requestInput.get('optradio')
          eventSt = requestInput.get('stTime')
          eventEnd = requestInput.get('endTime')
+
+         def timeConvert(s):  #converts 12hr format time to 24hr format time
+            m2 = s
+            in_time = datetime.strptime(m2, "%I:%M %p")
+            convertTime = datetime.strftime(in_time, "%H:%M")
+            return convertTime
+         
+         startTime = (timeConvert(eventSt))
+         endTime = (timeConvert(eventEnd))
+         
+
+         
          if(len(eventName)>0):
-            db.schedulardb.insert_one({'start':eventDate, 'title':eventName })
+            db.schedulardb.insert_one({'start':eventDate, 'title':eventName, 'des': eventDes, 'startTime': startTime, 'stTimeap':eventSt ,'endTime': endTime, 'endTimeap':eventEnd })
             print("insert running")
             
             e1 = list(db.schedulardb.find())
