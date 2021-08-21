@@ -39,7 +39,13 @@ def data_get():
          eventDes = requestInput.get('content1')
          # eventType = requestInput.get('optradio')
          eventSt = requestInput.get('stTime')
+         print(type(eventSt))
          eventEnd = requestInput.get('endTime')
+         endDate= datetime.strptime(requestInput.get('enddate_'), "%Y-%m-%d")    # converting the normal date to YYYY-MM-DD hh:mm:ss
+         str_endate=str(endDate)                  # converting the date into string 
+         str_endate=str_endate[0:10]              # extracting the date part only from the string  i.e YYYY-MM-DD
+         print("endate -> "+str_endate)           # printing the date part
+         
 
          def timeConvert(s):  #converts 12hr format time to 24hr format time
             m2 = s
