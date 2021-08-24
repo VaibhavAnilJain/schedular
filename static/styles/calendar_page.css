@@ -4,14 +4,31 @@
     width: 100vw;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 #calendar{
     width: 90%;
     height: 100%;
 }
+.weather_table{
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    margin-left: 10px;
+    /* width:30%; */
+}
+
+
+
+
 #tb{
-    margin-left: 4px;
-    width:30%;
+    /* margin-left: 4px; */
+    /* width:30%; */
+    overflow-x: auto;
     color: white;
     background-color: #2C3E50 ;
 }
+
+
+#tb td,#tb tr { white-space:pre }
+

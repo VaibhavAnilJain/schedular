@@ -1,12 +1,25 @@
-from flask import Flask, render_template,request,jsonify,json
+from flask import Flask, render_template,request
+import json
 from flask_pymongo import PyMongo
 from pymongo import message
-from datetime import datetime
+from datetime import datetime,date
+import urllib.request
 
 app = Flask(__name__)
 mongodb_client = PyMongo(app, uri="mongodb://localhost:27017/schedulardb")
 db = mongodb_client.db
-
+api = '424b66ac00e8889a485863936ec601a2'
+city = 'Mumbai'
+source = urllib.request.urlopen('http://api.openweathermap.org/data/2.5/weather?q='+city+'&units=metric&appid='+api).read()
+list_of_data = json.loads(source)
+weatherData = {
+       
+        "weather": list_of_data['weather'][0]['main'],
+        "weather_des": list_of_data['weather'][0]['description'],
+        "temp": list_of_data['main']['temp'],
+        "feels_like":list_of_data['main']['feels_like'], 
+        "weatherIcon": list_of_data['weather'][0]['icon']
+    }
 class Item:
   def __init__(self, vals):
     self.__dict__ = vals
@@ -20,15 +33,29 @@ def index():
 @app.route('/calendarPage')
 def calendar_page():
    
+   e01 = list(db.schedulardb.find())
+   print(e01)
+   print(type(e01))
+   e02 = [{k: v for k, v in d.items() if k != '_id'} for d in e01] #remove the _id key-value from extracted document
+   today = date.today()
+   e03 = [a_dict['end'] for a_dict in e02]
+   for i in e03:
+      di = datetime.strptime(i, "%Y-%m-%d").date()
+      if today>di:
+         db.schedulardb.delete_one({'end':i})
+   
    e1 = list(db.schedulardb.find())
    print(e1)
    print(type(e1))
-   e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1] #remove the _id key-value from extracted document
+   e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1]
+
+   
+
    print(e2)
    even = len(e2)
    print(even)
 
-   return render_template('calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2])
+   return render_template('calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2],weatherData = weatherData)
 
 @app.route('/getdata', methods=['GET','POST'])
 def data_get():
@@ -73,7 +100,7 @@ def data_get():
             print(even)
 
 
-   return render_template('/calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2])
+   return render_template('/calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2],weatherData = weatherData)
 
 @app.route('/deleteData', methods=['GET','POST'])
 def data_del():
@@ -100,7 +127,7 @@ def data_del():
          e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1]
          even = len(e2)
          print("Event deleted")
-   return render_template('/calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2])
+   return render_template('/calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2],weatherData = weatherData)
 
 
 if __name__ == '__main__':

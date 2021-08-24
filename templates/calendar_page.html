@@ -42,7 +42,7 @@
               var calendar = new FullCalendar.Calendar(calendarEl, {
                 height: 650,
                 initialView: 'dayGridMonth',
-                initialDate: '2021-07-07',
+                // initialDate: '2021-07-07',
                 selectable: true,
                 headerToolbar: {
                   left: 'prev,next today',
@@ -254,32 +254,13 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         
         <h1> Welcome!'{{n}}'</h1>
         <div class="container">
+          
           <div id="calendar" ></div>
+          <div class = "weather_table">
+          <div class="etable">
         <!-- <div class="table-responsive"> -->
           <table class="table table-sm" id="tb">
             <thead>
@@ -326,7 +307,15 @@
               </tr> -->
             </tbody>
           </table>
-        <!-- </div> -->
         </div>
+        <!-- </div> -->
+        <div class = "weather_">
+        <h3>Temperature: {{weatherData.temp}}&degC</h3>
+        <h3>Feels Like: {{weatherData.feels_like}}&degC</h3>
+        <h3>Weather: {{weatherData.weather}}   <img src = http://openweathermap.org/img/w/{{weatherData.weatherIcon}}.png></h3>
+        <h3>Description: {{weatherData.weather_des}}</h3>
+      </div>
+        </div>
+      </div>
     </body>
 </html>
