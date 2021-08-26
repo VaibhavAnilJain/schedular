@@ -2,6 +2,7 @@ from flask import Flask, render_template,request
 import json
 from flask_pymongo import PyMongo
 from pymongo import message
+import pymongo
 from datetime import datetime,date
 import urllib.request
 
@@ -44,16 +45,24 @@ def calendar_page():
       if today>di:
          db.schedulardb.delete_one({'end':i})
    
-   e1 = list(db.schedulardb.find())
-   print(e1)
-   print(type(e1))
+   # db.schedulardb.find().sort('{}'.format('title'), 1)
+
+   doc = db.schedulardb.find().sort([("end", 1), ("endTime", 1)])
+ #
+   print("----------------------------------------------------------------------------------------------------------------------")
+   for x in doc:
+      print(x)
+
+   e1 = list(db.schedulardb.find().sort([("end", 1), ("endTime", 1),("startTime",1)]))   # Sorting the collection from database.
+   # print(e1)
+   # print(type(e1))
    e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1]
 
-   
+  
 
-   print(e2)
+   # print(e2)
    even = len(e2)
-   print(even)
+   # print(even)
 
    return render_template('calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2],weatherData = weatherData)
 
@@ -90,8 +99,8 @@ def data_get():
             db.schedulardb.insert_one({'start':eventDate, 'title':eventName, 'des': eventDes, 'startTime': startTime, 'stTimeap':eventSt ,'endTime': endTime, 'endTimeap':eventEnd, 'end': str_endate })
             
             print("insert running")
-            
-            e1 = list(db.schedulardb.find())
+            # db.schedulardb.find().sort('start',PyMongo.ASCENDING)
+            e1 = list(db.schedulardb.find().sort([("end", 1), ("endTime", 1),("startTime",1)]))
             print(e1)
             print(type(e1))
             e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1] #remove the _id key-value from extracted document
@@ -121,7 +130,7 @@ def data_del():
          myquery = {'start':startDate,'title': eTitle, 'startTime': startTime, 'endTime':endTime,'end':endDate}
 
          db.schedulardb.delete_one(myquery)
-         e1 = list(db.schedulardb.find())
+         e1 = list(db.schedulardb.find().sort([("end", 1), ("endTime", 1),("startTime",1)]))
          # print(e1)
          # print(type(e1))
          e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1]
