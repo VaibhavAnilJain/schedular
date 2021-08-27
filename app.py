@@ -3,10 +3,24 @@ import json
 from flask_pymongo import PyMongo
 from pymongo import message
 import pymongo
-from datetime import datetime,date
+from datetime import datetime,date,timedelta
 import urllib.request
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+
+mail = Mail(app) # instantiate the mail class
+   
+# configuration of mail
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'schedularxp@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Sch3dular_Xp'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
+
 mongodb_client = PyMongo(app, uri="mongodb://localhost:27017/schedulardb")
 db = mongodb_client.db
 api = '424b66ac00e8889a485863936ec601a2'
@@ -54,15 +68,35 @@ def calendar_page():
       print(x)
 
    e1 = list(db.schedulardb.find().sort([("end", 1), ("endTime", 1),("startTime",1)]))   # Sorting the collection from database.
-   # print(e1)
+   print(e1[0].get('title'))
    # print(type(e1))
    e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1]
 
-  
+   now = datetime.now() 
+   remindTime1 = now.strftime("%Y-%m-%d %H:%M")
+   remindTime = datetime.strptime(remindTime1,"%Y-%m-%d %H:%M") #current date and time
+   eve_time1 = e1[0].get('end')+" "+e1[0].get('endTime') 
+   eve_time = datetime.strptime(eve_time1,"%Y-%m-%d %H:%M")
+   eveTime_early = eve_time - timedelta(hours=2) #time and date of event with earliest endtime
+   print(type(remindTime))
+   print(type(eve_time))
+
+   if(remindTime>=eveTime_early):
+      # tempEve = e1[0].get('title')
+      # print(mail)
+      msg = Message(
+                   e1[0].get('title')+' deadline creeping up!',
+                   sender ='schedularxp@gmail.com',
+                   recipients = ['vaibhavjain2418@gmail.com']
+                  )
+      msg.body = 'Deadline for '+e1[0].get('title')+' is due on '+e1[0].get('end')+' at '+e1[0].get('endTimeap')
+      mail.send(msg)
 
    # print(e2)
    even = len(e2)
    # print(even)
+
+
 
    return render_template('calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2],weatherData = weatherData)
 
