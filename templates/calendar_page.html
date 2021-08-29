@@ -52,7 +52,7 @@
                 eventClick: function(info) {
                     //alert('Event: ' + moment(info.event.start).format('YYYY-MM-DD'));
                     alert(info.event.end)
-                    $("#myModalLabel3").text("Event title "+info.event.title); 
+                  $("#myModalLabel3").text("Event title "+info.event.title); 
                    $("#myModalLabel2").text("Date "+moment(info.event.start).format('YYYY-MM-DD'));
                    $("#events_descr").modal('show');
                    $("#stdate_").val(moment(info.event.start).format('YYYY-MM-DD'));
