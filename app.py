@@ -123,7 +123,7 @@ def data_get():
    if request.method == "POST":
          requestInput = request.form
          eventDate = requestInput.get('dt') 
-         eventName = requestInput.get('name')
+         eventName = requestInput.get('event_name')
          eventDes = requestInput.get('content1')
          # eventType = requestInput.get('optradio')
          eventSt = requestInput.get('stTime')

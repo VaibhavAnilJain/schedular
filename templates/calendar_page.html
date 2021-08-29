@@ -16,10 +16,63 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script> -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
         <script>
 
 
+            $.validator.addMethod("anyDate",
+                function(value, element) {
+                    return value.match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/)
+                },
+                "Please enter the time in the valid format i.e hh:mm am/pm!"
+            );
+
+            $.validator.addMethod("endDate",
+            function(value, element) {
+            var startDate = $('#dateday').val();
+            console.log(startDate);
+            // var val=moment(value).format('YYYY-MM-DD');
+            console.log("value="+value);
+            return Date.parse(startDate) <= Date.parse(value) || (value == "");
+            }, "End date must be after start date");
+
+
+            $(function() {
+              console.log("you entered here once");
+            $("#newModalForm").validate({
+              rules: {
+               event_name: {
+                  required: true,
+                  minlength: 3
+                },
+                stTime:{
+                  required:true,
+                  anyDate: true
+                },
+                endTime:{
+                  required:true,
+                  anyDate: true
+                },
+                enddate_:{
+                  required:true,
+                  endDate:true
+                }                // action: "required"
+              },
+              messages: {
+                event_name: {
+                  required: "Please enter some data",
+                  minlength: "Your data must be at least 3 characters"
+                }
+                // action: "Please provide some data"
+              }
+            });
+            });
+
+
             document.addEventListener('DOMContentLoaded', function() {
+          
               var calendarEl = document.getElementById('calendar');
               var eventss = [];
 
@@ -53,87 +106,33 @@
                 eventClick: function(info) {
                     //alert('Event: ' + moment(info.event.start).format('YYYY-MM-DD'));
                     alert(info.event.end)
-                  $("#myModalLabel3").text("Event title "+info.event.title); 
-                   $("#myModalLabel2").text("Date "+moment(info.event.start).format('YYYY-MM-DD'));
-                   $("#events_descr").modal('show');
-                   $("#stdate_").val(moment(info.event.start).format('YYYY-MM-DD'));
-                   $("#title_").val(info.event.title);
-                   var a = info.event.start;
-                   $('#stTime_').val(moment(info.event.start).format('HH:mm'));
-                   $('#eTime_').val(moment(info.event.end).format('HH:mm'));
-                   $('#eDate_').val(moment(info.event.end).format('YYYY-MM-DD'));
-                   console.log(moment(info.event.start).format('HH:mm:ss'));
+                    $("#myModalLabel3").text("Event title "+info.event.title); 
+                   
+                    $("#myModalLabel2").text("Date "+moment(info.event.start).format('YYYY-MM-DD'));
+                    // $("#Description").text("Description: "+info.event.des);    //want to extract the description from the db
+                    $("#events_descr").modal('show');
+                    $("#stdate_").val(moment(info.event.start).format('YYYY-MM-DD'));
+                    $("#title_").val(info.event.title);
+                    var a = info.event.start;
+                    $('#stTime_').val(moment(info.event.start).format('HH:mm'));
+                    $('#eTime_').val(moment(info.event.end).format('HH:mm'));
+                    $('#eDate_').val(moment(info.event.end).format('YYYY-MM-DD'));
+                    console.log(moment(info.event.start).format('HH:mm:ss'));
                     
                 },
                 dateClick: function(info){
                   $("#myModalLabel").text("Add Events to "+info.dateStr); 
                   $("#exampleModalCenter").modal('show');
                  // $("#myModalLabel2").text("Date "+info.dateStr);
-                  $("#dateday").val(info.dateStr);
-                  
-                  // alert(info.dateStr);
-                  // arr=info.dateStr;
-                  // $.ajax
-                  // ({
-                  //     url:'/calendarPage',
-                  //     type:'POST',
-                  //     data:{'date':info.dateStr},
-                  //     success:function(response){
-                  //        console.log(response); 
-                  //     },
-                  //     error: function(error){
-                  //       console.log(error);
-                  //     }
-                  // })
-                // },
-                // select: function(info) {
-                // alert('selected ' + info.startStr + ' to ' + info.endStr);
-      },
-                events:eventss
-                //   {
-                //     groupId: '999',
-                //     title: 'Repeating Event',
-                //     start: '2021-07-09T16:00:00'
-                //   },
-                //   {
-                //     groupId: '999',
-                //     title: 'Repeating Event',
-                //     start: '2021-07-16T16:00:00'
-                //   },
-                //   {
-                //     title: 'Conference',
-                //     start: '2021-07-11',
-                //     end: '2021-07-13'
-                //   },
-                //   {
-                //     title: 'Meeting',
-                //     start: '2021-07-12T10:30:00',
-                //     end: '2021-07-12T12:30:00'
-                //   },
-                //   {
-                //     title: 'Lunch',
-                //     start: '2021-07-12T12:00:00'
-                //   },
-                //   {
-                //     title: 'Meeting',
-                //     start: '2021-07-12T14:30:00'
-                //   },
-                //   {
-                //     title: 'Birthday Party',
-                //     start: '2021-07-13T07:00:00'
-                //   },
-                //   {
-                //     title: 'Click for Google',
-                //     url: 'http://google.com/',
-                //     start: '2021-07-28'
-                //   }
-                // ]
+                  $("#dateday").val(info.dateStr);    // Setting the currrent date in an hidden field     
+               },
+                events:eventss                  // Adding list of dictionaries(events) to events
+                
               });
           
               calendar.render();
             });
-          // Time Picker Initialization
-            // $('#input_starttime').pickatime({});
+
           </script>
     </head>
     <body>
@@ -165,11 +164,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Add Event to </h4>
                 </div>
-                <form method="post" action="/getdata">
+                <form method="post" action="/getdata" id="newModalForm">
                     <div class="modal-body">
                         <div class="form-group">
                             <input class="form-control business_skill_id" type="hidden" name="id">
-                            <input class="form-control business_skill_name" name="name" placeholder="Enter the Event" required>
+                            <input class="form-control business_skill_name" id="event_name" name="event_name" placeholder="Enter the Event" required>
                         </div>
                         <div class="form-group">
                             <input class="form-control business_skill_content" type="hidden" name="content">
@@ -243,12 +242,14 @@
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                   
                   <h4 class="modal-title1" id="myModalLabel3">Event: Python Assignment </h4>
+                 
               </div>
               <form method="post" action="/deleteData">
                   <div class="modal-body">
                   
                     
                        <h6 class="modal-title1" id="myModalLabel2"></h6>
+                       <h6 class="modal-title1" id="Description"></h6>
                        <div class = "startDate_">
                         <input type='hidden' class="form-control" id="stdate_" name="stdate_" >
                        </div>
