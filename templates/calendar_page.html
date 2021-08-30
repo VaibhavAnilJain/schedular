@@ -141,16 +141,15 @@
 
       <div class="navcontainer">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="#">
+          <img width="150px" height="60px"src="/static/logo.svg" style="position:relative;top:-25px">
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link" href="#">Features</a>
-              <a class="nav-item nav-link" href="#">Pricing</a>
-              <a class="nav-item nav-link disabled" href="#">Disabled</a>
+              <a class="nav-item nav-link" href="#" style="text-align: left;"><span class="glyphicon glyphicon-log-out">LogOut </span><span class="sr-only">(current)</span></a>
             </div>
           </div>
         </nav>
@@ -279,10 +278,21 @@
         
         <!-- <h1> Welcome!'{{n}}'</h1> -->
         <div class="container">
-          
+          <div class="calWeather">
           <div id="calendar" ></div>
+          <div class = "weather_" id="weatherData">
+            <div class="weatherImg">
+              <br><br>
+            Temperature<p>{{weatherData.temp}}&degC</p> 
+            Feels Like<p>{{weatherData.feels_like}}&degC</p>
+            Weather<p>{{weatherData.weather}}</p>   <img src = http://openweathermap.org/img/w/{{weatherData.weatherIcon}}.png></h3>
+            Description<p>{{weatherData.weather_des}}</p>
+          </div>
+          <div class="bgImg"><img src="/static/Asset4.svg"></div>
+        </div>
+        </div>
           <div class = "weather_table">
-          <div class='table-responsive' style="overflow-x:auto;" id="tb">
+          <div class='table-responsive' style="overflow-x:auto;">
         <!-- <div class="table-responsive"> -->
           <table class="table table-bordered table-dark" id="tb">
             <thead class = "thead-dark">
@@ -299,7 +309,7 @@
             <tbody>
               {% for i in data %}
               
-              <tr>
+              <tr class="trow">
                 
                 <td>{{i.start}}</td>
                 <td>{{i.stTimeap}}</td>
@@ -331,12 +341,7 @@
           </table>
         </div>
         <!-- </div> -->
-        <div class = "weather_">
-        <h3>Temperature: {{weatherData.temp}}&degC</h3>
-        <h3>Feels Like: {{weatherData.feels_like}}&degC</h3>
-        <h3>Weather: {{weatherData.weather}}   <img src = http://openweathermap.org/img/w/{{weatherData.weatherIcon}}.png></h3>
-        <h3>Description: {{weatherData.weather_des}}</h3>
-      </div>
+
         </div>
       </div>
     </body>
