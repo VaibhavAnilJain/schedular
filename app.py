@@ -43,7 +43,7 @@ class Item:
 
 @app.route('/')
 def index():
-   return render_template('index.html')
+   return render_template('page_1.html')
 
 @app.route('/calendarPage')
 def calendar_page():
