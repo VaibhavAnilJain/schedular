@@ -48,6 +48,15 @@ body{
     font-size: x-large;
     color: #6f2da8;
 }
+
+.modal-title
+{
+    position: absolute;
+}
+.h4, h4 {
+    font-size: 18px;
+    position: absolute;
+}
 /* .weather_table{
     display: flex;
     flex-direction: column-reverse;
