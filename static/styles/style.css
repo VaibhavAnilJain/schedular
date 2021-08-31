@@ -1,3 +1,7 @@
+html,body,.split-screen{
+    height:100%;
+    width:100%;
+}
 *{
     line-height:1.5;
     --primary-blue:#11361a;
@@ -5,12 +9,12 @@
 
 }
 body{
-    background-image:url(/static/bg.svg);
+    background-image:url(/static/bg.png);
     font-family: 'Poppins';
     font-size: medium;
     font-weight: 500;
     background-repeat:no-repeat;
-    background-size: 100% 100%;
+    /* background-size: 100% 100%; */
 }
 h1{
     width:49%;
@@ -20,32 +24,42 @@ h1{
     padding-right: 10px;
     padding-top: 0.5rem;
     padding-bottom:0.5rem;
-    background:rgb(45, 215, 162);
+    background:linear-gradient(90deg, rgba(2,0,36,0.74833683477338936) 0%, rgb(0, 69, 71) 3%, rgb(24, 35, 38) 100%);
     color: rgb(247,248,252);
     font-size: 125%;
     font-weight:bold;
     border:none;
     border-radius: 0px 20px 20px 0px;
+    /* margin-top:40px; */
 }
 h3{
     display:flex;
     align-items:center;
     justify-content: center;
-    color: rgb(45,133,102);
+    color: rgb(24,35,38));
     margin-top:0px;
     margin-bottom: 0px;
     font-weight:999;
     font-size: xx-large;
     font-family: 'Gill Sans', 'Gill Sans MT', 'Calibiri', 'Trebuchet MS', 'sans-serif';
 }
+
+.copy h1
+{
+margin-bottom: 40px;;
+}
 .split-screen{
     width: 100%;
     display:flex;
     flex-direction: row;
     justify-content: center;
-    height:auto;
+    height:70%;
     padding-top:4rem;
     padding-bottom: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 7%
 }
 .footer{
     position:relative;
@@ -115,7 +129,7 @@ form input[type="password"]{
     border-top: hidden;
     border-left: hidden;
     border-right: hidden;
-    border-bottom: 3px solid rgb(45,133,102);
+    border-bottom:2px solid rgb(24, 35, 38);
     background-color: rgb(255,255,255);
     font-size: 0.875rem;
     font-weight: bold;
@@ -139,16 +153,20 @@ form input:focus{
 }
 .signup-btn{
     display: block;
-    width: 40%;
+    width: 35%;
     margin-top: 1rem;
-    background: rgb(45,215,162);
+    background:linear-gradient(
+        90deg
+        , rgba(2,0,36,0.7483368347338936) 0%, rgba(0,35,38,1) 3%, rgb(0, 66, 44) 100%);
     color: rgb(247, 248,252);
     font-family: 'Poppins';
     font-weight: bold;
     border:none;
-    padding:0.2rem;
+    padding:0.35rem;
     border-radius: 20px;
     font-size: 1.00rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 .signup-btn:hover{
     cursor: pointer;
@@ -203,10 +221,10 @@ a{
     .split-screen{
         width:530px;
         margin:auto;
-    }
-    h1{
-        margin-left:-29px;
-    }
+    }   
+    /* h1{
+        /* margin-left:-29px; */
+    } */
 }
 @media(min-width:768px) and (max-width:1024px)and (orientation:landscape){
 
