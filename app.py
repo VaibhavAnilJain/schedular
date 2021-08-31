@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,session
 import json
 from flask_pymongo import PyMongo
 from pymongo import message
@@ -6,6 +6,8 @@ import pymongo
 from datetime import datetime,date,timedelta
 import urllib.request
 from flask_mail import Mail, Message
+from werkzeug.utils import redirect
+from flask_session import Session
 
 app = Flask(__name__)
 
@@ -56,13 +58,15 @@ def validate():
          requestInput = request.form
          em = requestInput.get("emailId")
          print(em)
-         ctr = requestInput.get("country")
+         ctr = requestInput.get("city")
          print(ctr)
          p1 = requestInput.get("password1")
          print(p1)
          p2 = requestInput.get("password2")
          print(p2)
          if(p1==p2):
+
+            db.schedulardb.insert_one({'username':em, 'password': p1, 'city': ctr })
 
             return render_template('Login.html')
          else:
@@ -71,6 +75,30 @@ def validate():
 @app.route('/Login')
 def Login():
    return render_template('Login.html')
+   
+
+@app.route('/LoginVal', methods=['GET','POST'])
+def loginVal():
+   if request.method == "POST":
+      requestInput = request.form
+      un = requestInput.get("username")
+      
+      passwd = requestInput.get("pass")
+      
+      a = list(db.schedulardb.find({'username':un, 'password':passwd}))
+      if(a!=[]):
+         session['ct'] = a[0].get('city')
+         session['emailid'] = a[0].get('username')
+
+         return redirect (url_for('calendar_page'))
+         
+      
+      
+      # print("doesnt exist")
+      
+
+      return render_template('Login.html')
+      
 
 @app.route('/calendarPage')
 def calendar_page():

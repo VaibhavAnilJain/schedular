@@ -19,7 +19,7 @@
       </section>
     </div>
     <div class="right">
-      <form>
+      <form method="POST" action="/LoginVal">
         <section class="copy">
           <h1>Welcome Back</h1>
         </section>
@@ -31,14 +31,14 @@
             <input type="email" name ="username" placeholder ="Email Id" id ="username" required>
           </div>
           <div class = "input-container-password">
-            <input type="password" placeholder="password">
+            <input type="password" placeholder="password" name = "pass">
           </div>
           <div class="Loginbtn">
-            <button class = "signup-btn" type = "submit" value ="submit" onclick="validate();">Login</button>
+            <button class = "signup-btn" type = "submit" value ="submit">Login</button>
           </div>
           <div class="optional"><a href ="#">Forgot Password?</a></div>
           <div class = "new">
-            New User? <a href ="#">Create Account</a>
+            New User? <a href= {{ url_for('SignUp') }}>Create Account</a>
 
           </div>
         </div>
