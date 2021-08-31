@@ -45,6 +45,33 @@ class Item:
 def index():
    return render_template('page_1.html')
 
+
+@app.route('/Signup')
+def SignUp():
+   return render_template('Signup.html')
+
+@app.route('/valid', methods=['GET','POST'])
+def validate():
+   if request.method == "POST":
+         requestInput = request.form
+         em = requestInput.get("emailId")
+         print(em)
+         ctr = requestInput.get("country")
+         print(ctr)
+         p1 = requestInput.get("password1")
+         print(p1)
+         p2 = requestInput.get("password2")
+         print(p2)
+         if(p1==p2):
+
+            return render_template('Login.html')
+         else:
+            return render_template('Signup.html')
+
+@app.route('/Login')
+def Login():
+   return render_template('Login.html')
+
 @app.route('/calendarPage')
 def calendar_page():
    

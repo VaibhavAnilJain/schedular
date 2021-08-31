@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    </style>
+    <title>Signup Page</title>
+    <link rel = "stylesheet" href = "/static/styles/Signup.css">
+    <!-- <script src= " validate.js"></script> -->
+</head>
+<body>
+    <div class = "split-screen">
+        <div class = "left">
+            <section class = "copy">
+
+            </section>
+        </div>
+        <div class = "right">
+            <form method='post' action='/valid'>
+                <section class = "copy">
+                    <h1>Welcome</h1>
+                </section>
+                <section class = "title">
+                    <p> SIGN UP</p>
+                </section>
+                <div class = "textboxes">
+                    <input type = "email"  placeholder="Email ID"  name = "emailId" required>
+                    <!-- <input type = "text" id = "ename" placeholder="Full Name" pattern= "^[A-Za-z -]+$" tilte="Please enter only alphabets" required> -->
+                    <input type="text" placeholder="Country" name="country" required>
+                <div class = "both">
+                    <!-- <div class = "gen">
+                        <select name ="gender" id = "gen" required>
+                            <option value = " disabled selected hidden">Gender</option>
+                            <option value = "Male">Male</option>
+                            <option value ="Female">Female</option>
+                        </select>
+                    </div> -->
+                </div>
+                    <input type = "password" name = "password1" placeholder = "Password" required pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title = "Must contain Upper Case, Lowercase, Number, Special Character and min 8 chars" required>
+                    <input type = "password" name = "password2" placeholder="Confirm Password" required pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title = "Must contain Upper Case, Lowercase, Number, Special Character and min 8 chars" required><br>                     
+                </div>
+                <div class = "Signup button">
+                    <input id = "btn" type = "submit" value= "Sign Up">
+                </div>
+                <div class = "bottom-text">
+                    <p>Already have an account?<a href = {{ url_for('Login') }}>Login</a></p>
+
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class = "footer">
+        <p> TATA Consultancy Services @2021</p>
+    </div>
+    
+</body>
+</html>
