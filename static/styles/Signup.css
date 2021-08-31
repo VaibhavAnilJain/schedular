@@ -1,15 +1,19 @@
+html,body,.split-screen{
+    height:100%;
+    width:100%;
+}
 *{
     line-height: 1.5;
     --primary-blue: #233975;
     margin: 0px;
 }
 body{
-    background-image: url(/static/bg.svg);
-    background-repeat: no-repeat;
+    background-image: url(/static/bg.png);
+    /* background-repeat: no-repeat; */
     font-family: 'Poppins';
     font-size: medium;
     font-weight: 500;
-    background-size: 100% 100%;
+    /* background-size: 100% 100%; */
     
 
 }
@@ -43,9 +47,13 @@ h1{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    height: auto;
+    height: 70%;
     padding-top: 4rem;
     padding-bottom: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 7%
 
 }
 .left {
