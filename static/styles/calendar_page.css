@@ -75,6 +75,19 @@ body{
 
 }
 
+.glyphicon {
+    position: absolute;
+    top:unset;
+    display: inline-block;
+    font-family: "Glyphicons Halflings";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    right: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 .table tbody tr td{
     text-align: center;
     font-weight: bold;
@@ -83,7 +96,7 @@ body{
     background-color: gainsboro;
 }
 
-.table tbody tr:first-child td {
+.table tbody .trow:first-child td {
     font-weight: bold;
     color: white;
     background-color: #cf352e;

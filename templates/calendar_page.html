@@ -136,6 +136,7 @@
           </script>
     </head>
     <body>
+      <div id="loading"></div>
 
 
       <div class="navcontainer">
@@ -175,11 +176,7 @@
                             <textarea class="form-control" id="business_skill_content"  name="content1"  placeholder="Enter the Description" rows="4" cols="50" ></textarea>
                         </div>
                       
-                        <div class="radio">
-                          Type of Events &nbsp;&nbsp;&nbsp;
-                          <label class="radio-inline"><input type="radio" name="optradio" value="Indoor">Indoor</label>
-                          <label class="radio-inline"><input type="radio" name="optradio" value="Outdoor">Outdoor</label>
-                        </div>
+                        
                      
                         Enter start time &nbsp;&nbsp;&nbsp;&nbsp;
                           <div class="row">
@@ -309,7 +306,6 @@
             </thead>
             <tbody>
               {% for i in data %}
-              
               <tr class="trow">
                 
                 <td>{{i.start}}</td>

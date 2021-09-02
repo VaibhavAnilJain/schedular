@@ -128,7 +128,7 @@ def calendar_page():
       print("in if")
       e02 = [{k: v for k, v in d.items() if k != '_id'} for d in e01] #remove the _id key-value from extracted document
       today = date.today()
-      e033 = [e02[1]]
+      e033 = e02[1:]
       e03 = [a_dict['end'] for a_dict in e033]
       for i in e03:
          di = datetime.strptime(i, "%Y-%m-%d").date()
@@ -137,17 +137,17 @@ def calendar_page():
       
       # db.schedulardb.find().sort('{}'.format('title'), 1)
 
-      doc = db.schedulardb.find({'username':un, 'password':ps}).sort([("end", 1), ("endTime", 1)])
+      # doc = db.schedulardb.find({'username':un, 'password':ps}).sort([("end", 1), ("endTime", 1)])
    #
       print("----------------------------------------------------------------------------------------------------------------------")
-      for x in doc:
-         print(x)
+      
+        
 
       e1 = list(db.schedulardb.find({'username':un, 'password':ps}).sort([("end", 1), ("endTime", 1),("startTime",1)]))   # Sorting the collection from database.
-      print(e1[1].get('title'))
+      
       # print(type(e1))
       e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1]
-      e22 = [e2[1]]
+      e22 = e2[1:]
 
       now = datetime.now() 
       remindTime1 = now.strftime("%Y-%m-%d %H:%M")
@@ -181,14 +181,15 @@ def calendar_page():
          
                # print(even)
 
-               newvalues = { "$set": { "sentMail": 1} }
-               query = { "sentMail": 0,'username':un, 'password':ps }
+               # newvalues = { "$set": { "sentMail": 1} }
+               # query = { "sentMail": 0,'username':un, 'password':ps }
 
-               db.schedulardb.update_one(query, newvalues)
-      even = len(e2)
+               db.schedulardb.update_one({ "sentMail": 0}, { "$set": { "sentMail": 1} })
+      even = len(e22)
 
       weatherData = weather(ct)
-      return render_template('calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2],weatherData = weatherData)
+      print('e22:-------   ',e22)
+      return render_template('calendar_page.html',events = e22,n = even, data = [Item(i) for i in e22],weatherData = weatherData)
          #return render_template('calendar_page.html',events = [],n = 0, data = [],weatherData = weatherData)
 
 
@@ -240,10 +241,10 @@ def data_get():
             # e23 = [{k: v for k, v in d.items() if k != 'password'} for d in e22]
             # e24 = [{k: v for k, v in d.items() if k != 'city'} for d in e23]
             e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1] #remove the _id key-value from extracted document
-            e22 = [e2[1]]
-            print(e22)
+            e22 = e2[1:]
+            print('e22--------------------------------------------------------------------',e22)
       
-            even = len(e2)
+            even = len(e22)
             print(even)
 
 
@@ -297,7 +298,7 @@ def data_get():
                      msg = Message(
                                  k.get('title')+' deadline creeping up!',
                                  sender ='schedularxp@gmail.com',
-                                 recipients = ['vaibhavjain2418@gmail.com']
+                                 recipients = [un]
                                  )
                      msg.body = 'Deadline for '+k.get('title')+' is due on '+k.get('end')+' at '+k.get('endTimeap')
                      mail.send(msg)
@@ -306,13 +307,15 @@ def data_get():
                
                      # print(even)
 
-                     newvalues = {{'username':un, 'password':ps},{ "$set": { "sentMail": 1} }}
+                     newvalues = { "$set": { "sentMail": 1} }
                      query = { "sentMail": 0 }
 
                      db.schedulardb.update_one(query, newvalues)
-            even = len(e2)
+            even = len(e22)
             weatherData = weather(ct)
-            return render_template('calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2],weatherData = weatherData)
+            print('e22 get-----------------',e22)
+           
+            return render_template('calendar_page.html',events = e22,n = even, data = [Item(i) for i in e22],weatherData = weatherData)
       #return render_template('calendar_page.html',events = [],n = 0, data = [],weatherData = weatherData)
 
 
@@ -345,10 +348,11 @@ def data_del():
          # print(e1)
          # print(type(e1))
          e2 = [{k: v for k, v in d.items() if k != '_id'} for d in e1]
-         even = len(e2)
+         e22 = e2[1:]
+         even = len(e22)
          print("Event deleted")
    weatherData = weather(ct)
-   return render_template('/calendar_page.html',events = e2,n = even, data = [Item(i) for i in e2],weatherData = weatherData)
+   return render_template('/calendar_page.html',events = e22,n = even, data = [Item(i) for i in e22],weatherData = weatherData)
 
 @app.route('/Logout')
 def Logout():
