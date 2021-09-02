@@ -36,10 +36,10 @@ h3{
     display:flex;
     align-items:center;
     justify-content: center;
-    color: rgb(24,35,38));
-    margin-top:0px;
+    color: rgb(24,35,38);
+    margin-top: 0px;
     margin-bottom: 0px;
-    font-weight:999;
+    font-weight: 999;
     font-size: xx-large;
     font-family: 'Gill Sans', 'Gill Sans MT', 'Calibiri', 'Trebuchet MS', 'sans-serif';
 }
@@ -78,7 +78,7 @@ margin-bottom: 40px;;
     display:flex;
     width:75%;
     padding: 1rem;
-    background-image: url(/static/des.svg);
+    background-image: url(/static/girl2.svg);
     background-position:center;
     background-color:rgb(24, 35, 48);
     background-size: cover;
@@ -88,6 +88,7 @@ margin-bottom: 40px;;
     justify-content: center;
     align-items:center;
     box-shadow: 2px 2px 20px 2px rgb(20,20,20);
+    background-size: 100% 100%;
 
 }
 .left .copy{

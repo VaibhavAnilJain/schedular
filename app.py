@@ -83,7 +83,7 @@ def validate():
 
                return render_template('Login.html')
             else:
-               return render_template('Signup.html')
+               return render_template('Signup.html',flag="False")
          else:
             return render_template('Signup.html')
 

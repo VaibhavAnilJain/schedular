@@ -60,7 +60,7 @@ h1{
     display: flex;
     width: 75%;
     padding: 1rem;
-    background-image: url(/static/des.svg);
+    background-image: url(/static/girl2.svg);
     background-position: center;
     background-color:rgb(24,35,38);
     background-size:cover;
@@ -70,6 +70,7 @@ h1{
     padding: 3rem;
     align-items: center;
     box-shadow:  2px 2px 20px 2px rgb(20,20,20) ;
+    background-size: 100% 100%
 
 }
 .left .copy{
