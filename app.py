@@ -63,6 +63,7 @@ def SignUp():
 
 @app.route('/valid', methods=['GET','POST'])
 def validate():
+
    if request.method == "POST":
          requestInput = request.form
          em = requestInput.get("emailId")
@@ -88,6 +89,7 @@ def Login():
 
 @app.route('/LoginVal', methods=['GET','POST'])
 def loginVal():
+   flag =True
    if request.method == "POST":
       requestInput = request.form
       un = requestInput.get("username")
@@ -106,8 +108,8 @@ def loginVal():
       
       # print("doesnt exist")
       
-
-      return render_template('Login.html')
+      flag=False
+      return render_template('Login.html',flag=flag)
       
 
 @app.route('/calendarPage')
