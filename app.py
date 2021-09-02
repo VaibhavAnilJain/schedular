@@ -75,10 +75,15 @@ def validate():
          p2 = requestInput.get("password2")
          print(p2)
          if(p1==p2):
+            l1 = list(db.schedulardb.find({'username':em}))
+            if(l1==[]):
+               
 
-            db.schedulardb.insert_one({'username':em, 'password': p1, 'city': ctr })
+               db.schedulardb.insert_one({'username':em, 'password': p1, 'city': ctr })
 
-            return render_template('Login.html')
+               return render_template('Login.html')
+            else:
+               return render_template('Signup.html')
          else:
             return render_template('Signup.html')
 
