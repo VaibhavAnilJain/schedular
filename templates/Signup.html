@@ -10,6 +10,20 @@
     <title>Signup Page</title>
     <link rel = "stylesheet" href = "/static/styles/Signup.css">
     <!-- <script src= " validate.js"></script> -->
+
+
+    <script>
+    var check = function() {
+        if (document.getElementById('password').value ==
+            document.getElementById('confirm_password').value) {
+        document.getElementById('btn').disabled = false;
+        
+    } else {
+        document.getElementById('btn').disabled = true;
+        alert("Password didn't match");
+    }
+}
+    </script>
 </head>
 <body>
     <div class = "split-screen">
@@ -39,8 +53,9 @@
                         </select>
                     </div> -->
                 </div>
-                    <input type = "password" name = "password1" placeholder = "Password" required pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title = "Must contain Upper Case, Lowercase, Number, Special Character and min 8 chars" required>
-                    <input type = "password" name = "password2" placeholder="Confirm Password" required pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title = "Must contain Upper Case, Lowercase, Number, Special Character and min 8 chars" required><br>                     
+                    <input type = "password" name = "password1" id="password" placeholder = "Password" required pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title = "Must contain Upper Case, Lowercase, Number, Special Character and min 8 chars" required >
+                    <input type = "password" name = "password2" id="confirm_password" placeholder="Confirm Password" required pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title = "Must contain Upper Case, Lowercase, Number, Special Character and min 8 chars" required  onchange='check();'><br>                     
+                    <span id='message'></span>  
                 </div>   
                 <div class = "Signup button">
                     <input id = "btn" type = "submit" value= "Sign Up">
